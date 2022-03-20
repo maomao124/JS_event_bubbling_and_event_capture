@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+<!--
+Project name(项目名称)：JS_event_bubbling_and_event_capture
+  File name(文件名): test3
+  Authors(作者）: mao
+  Author QQ：1296193245
+  GitHub：https://github.com/maomao124/
+  Date(创建日期)： 2022/3/20
+  Time(创建时间)： 20:36
+  Description(描述)： 无
+-->
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        div, p, a {
+            padding: 15px 30px;
+            display: block;
+            border: 2px solid #000;
+            background: #fff;
+        }
+    </style>
+</head>
+<body>
+<div id="wrap">DIV
+    <p class="hint">P
+        <a href="#">A</a>
+    </p>
+</div>
+<script>
+    function showAlert(event)
+    {
+        alert("您点击了 " + this.tagName + " 标签");
+        //Event接口的stopPropagation()方法可防止在捕获和冒泡阶段进一步传播当前事件。
+        // 但是，它不会阻止任何默认行为的发生；例如，仍然会处理对链接的点击。
+        // 如果您想停止这些行为，请参阅preventDefault()方法。
+        event.stopPropagation();
+    }
+
+    var elems = document.querySelectorAll("div, p, a");
+    for (let elem of elems)
+    {
+        elem.addEventListener("click", showAlert);
+    }
+</script>
+</body>
+</html>

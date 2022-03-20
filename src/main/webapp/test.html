@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+
+<!--
+Project name(项目名称)：JS_event_bubbling_and_event_capture
+  File name(文件名): test
+  Authors(作者）: mao
+  Author QQ：1296193245
+  GitHub：https://github.com/maomao124/
+  Date(创建日期)： 2022/3/20
+  Time(创建时间)： 20:27
+  Description(描述)： 无
+-->
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        div, p, a {
+            padding: 15px 30px;
+            display: block;
+            border: 2px solid #000;
+            background: #fff;
+        }
+    </style>
+</head>
+<body>
+<div id="wrap">DIV
+    <p class="hint">P
+        <a href="#">A</a>
+    </p>
+</div>
+<script>
+    function showTagName()
+    {
+        alert("事件捕获: " + this.tagName);
+    }
+
+    //Element方法querySelectorAll()返回一个静态（非实时） NodeList ，
+    // 表示与指定选择器组匹配的元素列表，这些选择器是调用该方法的元素的后代。
+    var elems = document.querySelectorAll("div, p, a");
+    for (let elem of elems)
+    {
+        //为 type 属性值为 type 的事件附加事件侦听器。 callback 参数设置在调度事件时将调用的回调。
+        // options 参数设置特定于侦听器的选项。为了兼容性，这可以是一个布尔值，在这种情况下，该方法的行为就像该值被指定为选项的捕获一样。
+        // 当设置为 true 时，选项的捕获会阻止在事件的 eventPhase 属性值为 BUBBLING_PHASE 时调用回调。
+        // 当为 false（或不存在）时，当事件的 eventPhase 属性值为 CAPTURING_PHASE 时，不会调用回调。
+        // 无论哪种方式，如果事件的 eventPhase 属性值为 AT_TARGET，将调用回调。
+        // 当设置为 true 时，选项的被动表示回调不会通过调用 preventDefault() 来取消事件。这用于启用 § 2.8 观察事件侦听器中描述的性能优化。
+        // 当设置为 true 时，options 的 once 表示回调只会被调用一次，之后将删除事件侦听器。
+        // 事件侦听器被附加到目标的事件侦听器列表中，如果它具有相同的类型、回调和捕获，则不附加。
+        elem.addEventListener("click", showTagName, true);
+    }
+</script>
+</body>
+</html>
