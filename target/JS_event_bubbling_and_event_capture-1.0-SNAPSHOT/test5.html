@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+<!--
+Project name(项目名称)：JS_event_bubbling_and_event_capture
+  File name(文件名): test5
+  Authors(作者）: mao
+  Author QQ：1296193245
+  GitHub：https://github.com/maomao124/
+  Date(创建日期)： 2022/3/20
+  Time(创建时间)： 20:44
+  Description(描述)： 无
+-->
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a onclick="l()" href="https://www.bilibili.com/">链接</a>
+<br>
+<br>
+<a id="link" href="https://www.bilibili.com/">链接</a>
+
+<script>
+
+    function l(event)
+    {
+        alert("即将进入www.bilibili.com")
+    }
+    var link = document.getElementById("link");
+    link.addEventListener('click', function (event)
+    {
+        //Event接口的preventDefault()方法告诉用户代理 ，如果事件没有得到显式处理，则不应像通常那样采取其默认操作。
+        // 事件继续像往常一样传播，除非其中一个事件侦听器调用stopPropagation()或stopImmediatePropagation() ，
+        // 其中任何一个都会立即终止传播。
+        //如下所述，为不可取消的事件调用preventDefault() ，
+        // 例如通过EventTarget.dispatchEvent()调度的事件，而不指定cancelable: true无效。
+        event.preventDefault(); // 阻止链接跳转
+    });
+</script>
+</body>
+</html>

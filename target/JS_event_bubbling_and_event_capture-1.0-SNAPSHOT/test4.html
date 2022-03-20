@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+
+<!--
+Project name(项目名称)：JS_event_bubbling_and_event_capture
+  File name(文件名): test4
+  Authors(作者）: mao
+  Author QQ：1296193245
+  GitHub：https://github.com/maomao124/
+  Date(创建日期)： 2022/3/20
+  Time(创建时间)： 20:40
+  Description(描述)： 无
+-->
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        div, p, a {
+            padding: 15px 30px;
+            display: block;
+            border: 2px solid #000;
+            background: #fff;
+        }
+    </style>
+</head>
+<body>
+<div onclick="alert('您点击了 ' + this.tagName + ' 标签')">DIV
+    <p onclick="alert('您点击了 ' + this.tagName + ' 标签')">P
+        <a href="#" id="link">A</a>
+    </p>
+</div>
+<script>
+    function sayHi()
+    {
+        alert("事件处理程序 1");
+        //Event接口的stopImmediatePropagation()方法可防止调用同一事件的其他侦听器。
+        //如果多个侦听器附加到同一事件类型的同一元素，则按添加顺序调用它们。
+        // 如果在一次这样的调用期间调用了stopImmediatePropagation() ，则不会调用剩余的侦听器。
+        event.stopImmediatePropagation();
+    }
+
+    function sayHello()
+    {
+        alert("事件处理程序 2");
+    }
+
+    // 为 id 为 link 的标签定义多个点击事件
+    var link = document.getElementById("link");
+    link.addEventListener("click", sayHi);
+    link.addEventListener("click", sayHello);
+</script>
+</body>
+</html>
